@@ -6,12 +6,12 @@ resources:
       tasks:
         - task_key: collect_data
           notebook_task:
-            notebook_path: ../src/Retention Data Collector.py
+            notebook_path: ${workspace.file_path}/src/Retention Data Collector
             source: WORKSPACE
 
         - task_key: run_agent
           depends_on:
             - task_key: collect_data
           notebook_task:
-            notebook_path: ../src/Retention Agent.py
+            notebook_path: ${workspace.file_path}/src/Retention Agent
             source: WORKSPACE
