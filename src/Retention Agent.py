@@ -5,6 +5,12 @@
 
 import json
 
+
+dbutils.widgets.text("catalog", "workspace")
+dbutils.widgets.text("schema", "chiro_hackathon")
+
+TABLE_PATH = f"{dbutils.widgets.get('catalog')}.{dbutils.widgets.get('schema')}"
+
 collector = DataCollector(spark)
 patients = collector.get_agent_context(limit=3)
 
@@ -82,7 +88,7 @@ results = spark.createDataFrame(
 )
 
 results.write.mode("overwrite").saveAsTable(
-    "workspace.chiro_hackathon.ai_recommendations"
+    f"{TABLE_PATH}.ai_recommendations"
 )
 
 print("AI recommendations saved successfully!")

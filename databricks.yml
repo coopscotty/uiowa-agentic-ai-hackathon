@@ -4,6 +4,14 @@ bundle:
 include:
   - resources/*.yml
 
+variables:
+  catalog:
+    description: Catalog containing patient data
+    default: workspace
+  schema:
+    description: Schema containing patient data
+    default: chiro_hackathon
+
 workspace:
   root_path: ~/.bundle/${bundle.name}/${bundle.target}
 

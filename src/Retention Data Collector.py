@@ -6,7 +6,10 @@ Scores are outreach priorities, not actual probabilities of churn.
 
 from pyspark.sql import SparkSession, Window, functions as F
 
-TABLE_PATH = "workspace.chiro_hackathon"
+dbutils.widgets.text("catalog", "workspace")
+dbutils.widgets.text("schema", "chiro_hackathon")
+
+TABLE_PATH = f"{dbutils.widgets.get('catalog')}.{dbutils.widgets.get('schema')}"
 
 
 def build_retention_profiles(spark):
@@ -184,6 +187,6 @@ profiles = build_retention_profiles(spark)
 
 profiles.write.mode("overwrite").option(
     "overwriteSchema", "true"
-).saveAsTable("workspace.chiro_hackathon.retention_profiles")
+).saveAsTable(f"{TABLE_PATH}.retention_profiles")
 
 print("Dashboard data saved successfully!")
